@@ -1,29 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { collection, onSnapshot } from 'firebase/firestore'; // Import Firestore functions
-import firestore from './firebase';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from './components/HomePage';
+import NotesPage from './components/NotesPage';
+import AddNewNotePage from './components/AddNewNotePage';
 
 function App() {
-  const [notes, setNotes] = useState([]);
-
-useEffect(() => {
-  const notesCollectionRef = collection(firestore, 'notes');
-  const unsubscribe = onSnapshot(notesCollectionRef, (snapshot) => {
-    const notesData = snapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-    console.log('Fetched notes:', notesData); // Add this line
-    setNotes(notesData);
-  });
-
-  return () => unsubscribe();
-}, []);
-
   return (
-    <div className="app">
-      <h1>Note Taking App</h1>
-      {/* Render your note list or components here */}
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/notes" element={<NotesPage />} />
+        <Route path="/add-new-note" element={<AddNewNotePage />} />
+      </Routes>
+    </Router>
   );
 }
 
