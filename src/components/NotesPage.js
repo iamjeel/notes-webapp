@@ -23,13 +23,23 @@ const NotesPage = () => {
   return (
     <div>
       <Navigation />
-      <div className="page-content">
-        <h1>Notes Page</h1>
-        <ul>
+      <div className="all-notes">
+        <h1>All Notes</h1>
+        <div className="note-cards">
           {notes.map((note) => (
-            <li key={note.id}>{note.text}</li>
+            <div key={note.id} className="note-card">
+              <h2 className="note-title">{note.title}</h2>
+              <p className="note-description">
+                {note.description && note.description.length > 50
+                  ? `${note.description.slice(0, 50)}...`
+                  : note.description}
+              </p>
+              <p className="note-timestamp">
+                {new Date(note.timestamp.toDate()).toLocaleString()}
+              </p>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </div>
   );

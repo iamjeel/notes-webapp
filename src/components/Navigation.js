@@ -5,7 +5,7 @@ import './Navigation.css'; // Import your CSS file
 
 const Navigation = () => {
   return (
-    <nav className="navbar">
+    <nav className="navbar" aria-label="Navigation">
       <ul className="nav-list">
         <li>
           <Link to="/">Home</Link>
